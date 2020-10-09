@@ -15,7 +15,7 @@ class Database():
     def __init__(self, uri=None, app=None):
         self.database_uri = uri
         self.conn = None
-        self.tables = ['client']
+        self.tables = ['songs']
         if app is not None:
             self.init_app(app)
 
@@ -60,7 +60,15 @@ class Database():
     def create_all(self):
         self.connect()
         queries = [
-            "CREATE TABLE client (client_id uuid PRIMARY KEY);"]
+            """CREATE TABLE IF NOT EXISTS songs (
+                id uuid PRIMARY KEY,
+                name VARCHAR (255) NOT NULL,
+                genre VARCHAR (4) NOT NULL,
+                artist VARCHAR (255) NOT NULL,
+                length INTEGER CHECK (length > 0),
+                song VARCHAR (2056),
+                ranking INTEGER CHECK (ranking >= 0 AND ranking <= 5)
+            );"""]
         try:
             with self.conn.cursor() as cursor:
                 for query in queries:

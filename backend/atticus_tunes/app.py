@@ -4,6 +4,7 @@ import os
 from flask import Flask, jsonify
 from werkzeug.middleware.proxy_fix import ProxyFix
 
+from atticus_tunes.song.routes import song
 from atticus_tunes.extensions import db
 
 
@@ -25,7 +26,7 @@ def create_app(test_config=None):
 
     db.init_app(app)
 
-    # app.register_blueprint(song)
+    app.register_blueprint(song)
 
     init_middleware(app)
 
