@@ -21,7 +21,7 @@ class SongAPI(MethodView):
         """Responds to HTTP GET request at /songs/{id}, where {id} is a placeholder for a valid song ID.
         Returns Binary Stream response if successful, else json with error message and error status
         """
-        song = SongService.get_by_id(id)
+        song: Song = SongService.get_by_id(id)
 
         if song:
             try:
@@ -38,7 +38,7 @@ class SongAPI(MethodView):
         """Responds to HTTP POST request at /songs/ with valid JSON data to create a Song.
         Attempts to Create a database entry for the input data and returns it if successful.
         """
-        created = SongService.create(args)
+        created: Song = SongService.create(args)
         if created:
             schema = SongSchema(many=False)
             output = schema.dump(created)
@@ -56,7 +56,7 @@ class SongAPI(MethodView):
         """
         to_update = SongService.get_by_id(id)
 
-        updated = SongService.update(to_update, args)
+        updated: Song = SongService.update(to_update, args)
         if updated:
             schema = SongSchema(many=False)
             output = schema.dump(updated)

@@ -27,7 +27,6 @@ class TestSongCRUD(ViewTestMixin):
     def test_Song_get_by_id(self, app, songs):
         response = self.client.get(
             url_for('song.song_api', id=songs[0].id))
-        response_data = response
 
         assert response.status_code == 200
         assert response.content_type == 'audio/mpeg'
