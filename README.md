@@ -159,6 +159,7 @@ cd tunes
 
 ```bash
 # --rm removes container after use, see /backend/cli_commands/test_cmd.py for more
+docker-compose build
 docker-compose run --rm backend python manage.py test
 ```
 
